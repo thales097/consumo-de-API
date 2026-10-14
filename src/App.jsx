@@ -7,18 +7,53 @@ import axios from "axios"
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [text, setText] = useState(()=> {
+    return localStorage.getItem('easy-input') || '';
+  });
+  const [count, setCount] = useState(0);
 const [person, setPerson] = useState({}); 
 const [loading, setLoading] = useState(true); 
 const [error, setError] = useState(false); 
 const [personagem, setPersonagem] = useState({});
 const[pokemon, setPokemon] = useState({});
 const[filme, setFilme] = useState({});
+const [query, setQuery] = useState ('');
+const [movies, setMovies] = useState([]);
+const [queryLoading, setQueryLoading] = useState(false);
+const [queryError, setQueryError] = useState('');
+useEffect(()=>{
+localStorage.setItem('easy-input', text)
+},[text])
+
+const buscarFilmes = async() =>{
+  if (!query.trim()){
+    setMovies([]);
+    setQueryError('Digite o nome de um filme.');
+    return
+  }
+  try{
+    setQueryLoading(true);
+    setQueryError('');
+    const res = await axios.get(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=135716d2`);
+    if(res.data.Response === 'True'){
+      setMovies(res.data.Search);
+    }else{
+      setMovies([]);
+      setQueryError('Nenhum filme encontrado.');
+    }
+  }catch (error){
+    setMovies([]);
+    setQueryError('Error ao buscar filmes, tente novamente');
+    console.error(error);
+  }finally{
+    setQueryLoading(false);
+  }
+};
 
 useEffect(() => { 
 const getData = async () => { 
 try { 
-const res4 = await axios.get("https://www.omdbapi.com/?s=The%20Butterfly%20Effect&apikey=135716d2")
+const res4 = await axios.get(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=135716d2`)
 setFilme(res4.data);
 const res3 = await axios.get("https://pokeapi.co/api/v2/pokemon/charizard")
 setPokemon(res3.data);
@@ -43,6 +78,41 @@ if(error){return(<div>Ocorreu um erro</div>)}
 
   return (
     <>
+    <div> 
+      <input
+    type='text'
+    value= {query}
+    onChange={(e) => setQuery(e.target.value)}
+    onKeyDown={(e) =>{
+      if(e.key === 'Enter') buscarFilmes();
+    }}
+    placeholder='Pesquise um filme...'
+    />
+    <button type='button' onClick={buscarFilmes}>
+      Pesquisar
+    </button>
+    </div>
+    
+    {queryError && <p>{queryError}</p>}
+    
+    <ul>
+      {movies.map((movies) => (
+      <li key={movies.imdbID}>
+        <h3>{movies.Title}</h3>
+        <p>Ano:{movies.Year}</p>
+        <p>Tipo: {movies.Type}</p>
+
+        {movies.Poster !=='N/A' && (
+          <img
+          src={movies.Poster}
+          alt={`Poster de ${movies.Title}`}
+          width='150'
+          />
+        )}
+         
+         </li>
+        ))}
+    </ul>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
