@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 import axios from "axios"
+import DragonBall from './components/DragonBall.jsx';
 
 
 function App() {
@@ -59,7 +60,7 @@ const res3 = await axios.get("https://pokeapi.co/api/v2/pokemon/charizard")
 setPokemon(res3.data);
 const res2 = await axios.get("https://6a79e554674f43f4db11ebc8.mockapi.io/api/person")
 setPerson(res2.data);
-const res = await axios.get( "https://dragonball-api.com/api/characters/11" ); 
+const res = await axios.get( "https://dragonball-api.com/api/characters/31" ); 
 setPersonagem(res.data); 
 console.log("Success:", res.data); 
 setLoading(false); 
@@ -122,20 +123,9 @@ if(error){return(<div>Ocorreu um erro</div>)}
         <div>
           <h1>{person[1].nome}</h1>
         </div>
-        <div>
-          <h1>{personagem.name}</h1>
-          <img 
-          src={personagem.image}
-          alt={personagem.name}
-          width='250'
-          />
 
-          <p>Raça: {personagem.race}</p>
-          <p>Ki: {personagem.ki}</p>
-          <p>Ki maximo: {personagem.maxKi}</p>
-          <p>Afiliação: {personagem.affiliation}</p>
-          <p>Descrição: {personagem.description}</p>
-        </div>
+        <DragonBall personagem={personagem}/>
+
         <button
           type="button"
           className="counter"
