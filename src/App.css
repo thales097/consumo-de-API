@@ -182,3 +182,168 @@
     border-right-color: var(--border);
   }
 }
+.btn-pesquisar {
+  background-color: #120f2b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-pesquisar:hover {
+background: -webkit-linear-gradient(90deg, #a48863,#c85f72,#845fce);                     
+background: linear-gradient(90deg, #a48863,#c85f72,#845fce);                            
+}
+
+
+.tema-opcoes {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+
+.botao-tema {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  background-color: var(--cartao);
+  color: var(--texto);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.botao-tema:hover {
+  transform: scale(1.1);
+}
+
+
+:root {
+  --fundo: #f4f6fa;
+  --texto: #172033;
+  --cartao: #ffffff;
+  --borda: #dce1eb;
+}
+
+:root[data-theme="escuro"] {
+  --fundo: #151923;
+  --texto: #f8fafc;
+  --cartao: #242a38;
+  --borda: #394150;
+}
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+input {
+  background-color: var(--cartao);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 5px;
+  padding: 8px;
+}
+
+input::placeholder {
+  color: var(--texto);
+  opacity: 0.7;
+}
+
+
+/* Cabeçalho do CineBusca */
+.cabecalho {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 520px) 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--borda);
+  background-color: var(--cartao);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Marca e nome */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca-icone {
+  font-size: 32px;
+}
+
+.marca h1 {
+  font-size: 23px;
+  margin: 0;
+  color: var(--texto);
+}
+
+.marca p {
+  font-size: 12px;
+  margin: 4px 0 0;
+  color: var(--texto);
+  opacity: 0.7;
+}
+
+/* Pesquisa */
+.pesquisa-filmes {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.pesquisa-filmes input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background-color: var(--fundo);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  outline: none;
+}
+
+.pesquisa-filmes input:focus {
+  border-color: #845fce;
+}
+
+.pesquisa-filmes .btn-pesquisar {
+  flex-shrink: 0;
+}
+
+/* Botão de tema */
+.cabecalho .tema-opcoes {
+  justify-self: end;
+  padding: 0;
+}
+
+.botao-tema {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Telas menores */
+@media (max-width: 700px) {
+  .cabecalho {
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .pesquisa-filmes {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .marca h1 {
+    font-size: 21px;
+  }
+}
+

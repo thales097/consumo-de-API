@@ -11,6 +11,9 @@ function App() {
   const [text, setText] = useState(()=> {
     return localStorage.getItem('easy-input') || '';
   });
+  const [tema, setTema] = useState(() => {
+  return localStorage.getItem('tema-site') || 'claro';
+});
   const [count, setCount] = useState(0);
 const [person, setPerson] = useState({}); 
 const [loading, setLoading] = useState(true); 
@@ -25,6 +28,11 @@ const [queryError, setQueryError] = useState('');
 useEffect(()=>{
 localStorage.setItem('easy-input', text)
 },[text])
+
+useEffect(() => {
+  document.documentElement.dataset.theme = tema;
+  localStorage.setItem('tema-site', tema);
+}, [tema]);
 
 const buscarFilmes = async() =>{
   if (!query.trim()){
@@ -79,20 +87,61 @@ if(error){return(<div>Ocorreu um erro</div>)}
 
   return (
     <>
-    <div> 
-      <input
-    type='text'
-    value= {query}
-    onChange={(e) => setQuery(e.target.value)}
-    onKeyDown={(e) =>{
-      if(e.key === 'Enter') buscarFilmes();
-    }}
-    placeholder='Pesquise um filme...'
+  
+
+<header className="cabecalho">
+  <div className="marca">
+    <span className="marca-icone">🎬</span>
+    <div>
+      <h1>CineBusca</h1>
+      <p>Encontre seu próximo filme</p>
+    </div>
+  </div>
+
+  <div className="pesquisa-filmes">
+    <input
+      type="text"
+      value={query}
+      
+onChange={(e) => {
+  const valor = e.target.value;
+  setQuery(valor);
+
+  if (!valor.trim()) {
+    setMovies([]);
+    setQueryError('');
+  }
+}}
+
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') buscarFilmes();
+      }}
+      placeholder="Pesquise um filme..."
     />
-    <button type='button' onClick={buscarFilmes}>
+
+    <button
+      type="button"
+      className="btn-pesquisar"
+      onClick={buscarFilmes}
+    >
       Pesquisar
     </button>
-    </div>
+  </div>
+
+  <div className="tema-opcoes">
+    <button
+      className="botao-tema"
+      onClick={() =>
+        setTema(tema === 'claro' ? 'escuro' : 'claro')
+      }
+      aria-label="Alternar tema"
+      title="Alternar tema"
+    >
+      {tema === 'claro' ? '🌙' : '☀️'}
+    </button>
+  </div>
+</header>
+
     
     {queryError && <p>{queryError}</p>}
     
@@ -121,7 +170,7 @@ if(error){return(<div>Ocorreu um erro</div>)}
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>{person[1].nome}</h1>
+          <h1>{person[1]?.nome}</h1>
         </div>
 
         <DragonBall personagem={personagem}/>
@@ -183,7 +232,7 @@ if(error){return(<div>Ocorreu um erro</div>)}
         </div>
           <ul>
             <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
+              <a href="https://github.com/thales097" target="_blank">
                 <svg
                   className="button-icon"
                   role="presentation"
@@ -192,42 +241,6 @@ if(error){return(<div>Ocorreu um erro</div>)}
                   <use href="/icons.svg#github-icon"></use>
                 </svg>
                 GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
               </a>
             </li>
           </ul>
