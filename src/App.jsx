@@ -43,7 +43,9 @@ const buscarFilmes = async() =>{
   try{
     setQueryLoading(true);
     setQueryError('');
-    const res = await axios.get(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=135716d2`);
+    const res = await axios.get(
+  `/api/filmes?busca=${encodeURIComponent(query)}`
+);
     if(res.data.Response === 'True'){
       setMovies(res.data.Search);
     }else{
@@ -62,8 +64,6 @@ const buscarFilmes = async() =>{
 useEffect(() => { 
 const getData = async () => { 
 try { 
-const res4 = await axios.get(`https://www.omdbapi.com/?s=${encodeURIComponent(query)}&apikey=135716d2`)
-setFilme(res4.data);
 const res3 = await axios.get("https://pokeapi.co/api/v2/pokemon/charizard")
 setPokemon(res3.data);
 const res2 = await axios.get("https://6a79e554674f43f4db11ebc8.mockapi.io/api/person")
