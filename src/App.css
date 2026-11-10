@@ -232,7 +232,7 @@ background: linear-gradient(90deg, #a48863,#c85f72,#845fce);
 
 :root[data-theme="escuro"] {
   --fundo: #151923;
-  --texto: #f8fafc;
+  --texto: #ffffff;
   --cartao: #242a38;
   --borda: #394150;
 }
