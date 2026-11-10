@@ -1,0 +1,387 @@
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}
+.btn-pesquisar {
+  background-color: #120f2b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-pesquisar:hover {
+background: -webkit-linear-gradient(90deg, #a48863,#c85f72,#845fce);                     
+background: linear-gradient(90deg, #a48863,#c85f72,#845fce);                            
+}
+
+
+.tema-opcoes {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px;
+}
+
+.botao-tema {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--borda);
+  background-color: var(--cartao);
+  color: var(--texto);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.botao-tema:hover {
+  transform: scale(1.1);
+}
+
+
+input {
+  background-color: var(--cartao);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 5px;
+  padding: 8px;
+}
+
+input::placeholder {
+  color: var(--texto);
+  opacity: 0.7;
+}
+
+
+/* Cabeçalho do CineBusca */
+.cabecalho {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 520px) 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--borda);
+  background-color: var(--cartao);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Marca e nome */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca-icone {
+  font-size: 32px;
+}
+
+.marca h1 {
+  font-size: 23px;
+  margin: 0;
+  color: var(--texto);
+}
+
+.marca p {
+  font-size: 12px;
+  margin: 4px 0 0;
+  color: var(--texto);
+  opacity: 0.7;
+}
+
+/* Pesquisa */
+.pesquisa-filmes {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.pesquisa-filmes input {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background-color: var(--fundo);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  outline: none;
+}
+
+.pesquisa-filmes input:focus {
+  border-color: #845fce;
+}
+
+.pesquisa-filmes .btn-pesquisar {
+  flex-shrink: 0;
+}
+
+/* Botão de tema */
+.cabecalho .tema-opcoes {
+  justify-self: end;
+  padding: 0;
+}
+
+.botao-tema {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Telas menores */
+@media (max-width: 700px) {
+  .cabecalho {
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    padding: 16px;
+  }
+
+  .pesquisa-filmes {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .marca h1 {
+    font-size: 21px;
+  }
+}
+
+
+
+/* Botão desabilitado durante a busca */
+.btn-pesquisar:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Mensagens da busca */
+.mensagem {
+  margin: 20px 0 0;
+  color: var(--texto);
+}
+
+/* Resultados da busca */
+.lista-filmes {
+  list-style: none;
+  margin: 24px 0;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+}
+
+.cartao-filme {
+  background-color: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.cartao-filme:hover {
+  transform: translateY(-3px);
+}
+
+.cartao-filme h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-h);
+}
+
+.cartao-filme p {
+  font-size: 14px;
+}
+
+.cartao-filme img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 6px;
+  margin-top: auto;
+}
