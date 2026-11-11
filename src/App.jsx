@@ -5,7 +5,15 @@ import viteLogo from './assets/vite.svg'
 import './App.css'
 import axios from 'axios'
 import DragonBall from './components/DragonBall.jsx'
+<<<<<<< HEAD
 
+=======
+import Header from './components/header.jsx'
+import Filmes from './components/filmes.jsx'
+import Pokemon from './components/pokemon.jsx'
+import Person from './components/person.jsx'
+import Destaque from './components/destaque.jsx'
+>>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
 function App() {
   const [tema, setTema] = useState(() => {
     return localStorage.getItem('tema-site') || 'claro'
@@ -87,6 +95,7 @@ function App() {
 
   return (
     <>
+<<<<<<< HEAD
       <header className="cabecalho">
         <div className="marca">
           <span className="marca-icone">🎬</span>
@@ -156,6 +165,23 @@ function App() {
           </li>
         ))}
       </ul>
+=======
+      <Header
+      query={query}
+      setQuery={setQuery}
+      setMovies={setMovies}
+      setQueryError={setQueryError}
+      buscarFilmes={buscarFilmes}
+      queryLoading={queryLoading}
+      tema={tema}
+      setTema={setTema}
+    />
+
+      <Filmes
+  movies={movies}
+  queryError={queryError}
+/>
+>>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
 
       {loading && <p className="mensagem">Carregando...</p>}
       {!loading && error && (
@@ -168,9 +194,7 @@ function App() {
           <img src={reactLogo} className="framework" alt="React logo" />
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
-        <div>
-          <h1>{person[1]?.nome}</h1>
-        </div>
+        <Person person={person} />
 
         <DragonBall personagem={personagem} />
 
@@ -192,6 +216,7 @@ function App() {
           </svg>
           <div>
             <h1>O Goat dos filmes.</h1>
+<<<<<<< HEAD
             {destaque && (
               <>
                 <h2>{destaque.Title}</h2>
@@ -200,6 +225,9 @@ function App() {
                 )}
               </>
             )}
+=======
+            <Destaque destaque={destaque} />
+>>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
           </div>
           <ul>
             <li>
@@ -221,6 +249,7 @@ function App() {
             <use href="/icons.svg#social-icon"></use>
           </svg>
           <h2>Meu Pet</h2>
+<<<<<<< HEAD
           <div>
             <h1>{pokemon.name}</h1>
             <img
@@ -231,6 +260,9 @@ function App() {
             <p>Altura: {pokemon.height}</p>
             <p>Peso: {pokemon.weight}</p>
           </div>
+=======
+          <Pokemon pokemon={pokemon} />
+>>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
           <ul>
             <li>
               <a href="https://github.com/thales097" target="_blank" rel="noreferrer">
