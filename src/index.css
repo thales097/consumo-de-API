@@ -3,20 +3,20 @@
 :root {
   --text: #4b5568;
   --text-h: #172033;
-  --bg: #ffffff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
+  --bg: #e8dfd2;
+  --border: #d2c6b6;
+  --code-bg: #eee5d9;
   --accent: #aa3bff;
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --social-bg: rgba(245, 240, 232, 0.7);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --fundo: #f4f6fa;
-  --texto: #172033;
-  --cartao: #ffffff;
-  --borda: #dce1eb;
+  --fundo: #e8dfd2;
+  --texto: #40372f;
+  --cartao: #f5f0e8;
+  --borda: #d2c6b6;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;

@@ -1,29 +1,32 @@
-﻿import { useState, useEffect } from 'react'
+
+import { useState, useEffect } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 import axios from 'axios'
+
 import DragonBall from './components/DragonBall.jsx'
 import Header from './components/header.jsx'
 import Filmes from './components/filmes.jsx'
 import Pokemon from './components/pokemon.jsx'
 import Person from './components/person.jsx'
 import Destaque from './components/destaque.jsx'
+import RandomEncounter from './components/sorteio.jsx'
+
 function App() {
   const [tema, setTema] = useState(() => {
     return localStorage.getItem('tema-site') || 'claro'
   })
+
   const [count, setCount] = useState(0)
 
-  // Dados das APIs "de exemplo" (Pok├®mon, MockAPI, Dragon Ball)
   const [person, setPerson] = useState({})
   const [personagem, setPersonagem] = useState({})
   const [pokemon, setPokemon] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  // Busca de filmes
   const [query, setQuery] = useState('')
   const [movies, setMovies] = useState([])
   const [queryLoading, setQueryLoading] = useState(false)
@@ -53,7 +56,6 @@ function App() {
         setMovies(res.data.Search)
       } else {
         setMovies([])
-        // A OMDb manda o motivo em res.data.Error (ex.: "Invalid API key!")
         setQueryError(res.data.Error || 'Nenhum filme encontrado.')
       }
     } catch (err) {
@@ -67,20 +69,29 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-      // allSettled: se uma API falhar, as outras continuam funcionando
-      const [pokemonRes, personRes, dragonRes] = await Promise.allSettled([
-        axios.get('https://pokeapi.co/api/v2/pokemon/charizard'),
-        axios.get('https://6a79e554674f43f4db11ebc8.mockapi.io/api/person'),
-        axios.get('https://dragonball-api.com/api/characters/31'),
-      ])
+      const [pokemonRes, personRes, dragonRes] =
+        await Promise.allSettled([
+          axios.get('https://pokeapi.co/api/v2/pokemon/charizard'),
+          axios.get('https://6a79e554674f43f4db11ebc8.mockapi.io/api/person'),
+          axios.get('https://dragonball-api.com/api/characters/31'),
+        ])
 
-      if (pokemonRes.status === 'fulfilled') setPokemon(pokemonRes.value.data)
-      if (personRes.status === 'fulfilled') setPerson(personRes.value.data)
-      if (dragonRes.status === 'fulfilled') setPersonagem(dragonRes.value.data)
+      if (pokemonRes.status === 'fulfilled') {
+        setPokemon(pokemonRes.value.data)
+      }
 
-      if ([pokemonRes, personRes, dragonRes].some((r) => r.status === 'rejected')) {
+      if (personRes.status === 'fulfilled') {
+        setPerson(personRes.value.data)
+      }
+
+      if (dragonRes.status === 'fulfilled') {
+        setPersonagem(dragonRes.value.data)
+      }
+
+      if ([pokemonRes, personRes, dragonRes].some(r => r.status === 'rejected')) {
         setError(true)
       }
+
       setLoading(false)
     }
 
@@ -92,24 +103,24 @@ function App() {
   return (
     <>
       <Header
-      query={query}
-      setQuery={setQuery}
-      setMovies={setMovies}
-      setQueryError={setQueryError}
-      buscarFilmes={buscarFilmes}
-      queryLoading={queryLoading}
-      tema={tema}
-      setTema={setTema}
-    />
+        query={query}
+        setQuery={setQuery}
+        setMovies={setMovies}
+        setQueryError={setQueryError}
+        buscarFilmes={buscarFilmes}
+        queryLoading={queryLoading}
+        tema={tema}
+        setTema={setTema}
+      />
 
-      <Filmes
-  movies={movies}
-  queryError={queryError}
-/>
+      <Filmes movies={movies} queryError={queryError} />
 
       {loading && <p className="mensagem">Carregando...</p>}
+
       {!loading && error && (
-        <p className="mensagem">Alguns dados n├úo puderam ser carregados.</p>
+        <p className="mensagem">
+          Alguns dados não puderam ser carregados.
+        </p>
       )}
 
       <section id="center">
@@ -118,6 +129,7 @@ function App() {
           <img src={reactLogo} className="framework" alt="React logo" />
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
+
         <Person person={person} />
 
         <DragonBall personagem={personagem} />
@@ -125,7 +137,7 @@ function App() {
         <button
           type="button"
           className="counter"
-          onClick={() => setCount((c) => c + 1)}
+          onClick={() => setCount(c => c + 1)}
         >
           Count is {count}
         </button>
@@ -138,10 +150,12 @@ function App() {
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#documentation-icon"></use>
           </svg>
+
           <div>
             <h1>O Goat dos filmes.</h1>
             <Destaque destaque={destaque} />
           </div>
+
           <ul>
             <li>
               <a href="https://vite.dev/" target="_blank" rel="noreferrer">
@@ -149,6 +163,7 @@ function App() {
                 Explore Vite
               </a>
             </li>
+
             <li>
               <a href="https://react.dev/" target="_blank" rel="noreferrer">
                 <img className="button-icon" src={reactLogo} alt="" />
@@ -157,12 +172,16 @@ function App() {
             </li>
           </ul>
         </div>
+
         <div id="social">
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#social-icon"></use>
           </svg>
+
           <h2>Meu Pet</h2>
+
           <Pokemon pokemon={pokemon} />
+          <RandomEncounter/>
           <ul>
             <li>
               <a href="https://github.com/thales097" target="_blank" rel="noreferrer">
