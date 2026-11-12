@@ -1,26 +1,22 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
 import axios from 'axios'
 import DragonBall from './components/DragonBall.jsx'
-<<<<<<< HEAD
-
-=======
 import Header from './components/header.jsx'
 import Filmes from './components/filmes.jsx'
 import Pokemon from './components/pokemon.jsx'
 import Person from './components/person.jsx'
 import Destaque from './components/destaque.jsx'
->>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
 function App() {
   const [tema, setTema] = useState(() => {
     return localStorage.getItem('tema-site') || 'claro'
   })
   const [count, setCount] = useState(0)
 
-  // Dados das APIs "de exemplo" (Pokémon, MockAPI, Dragon Ball)
+  // Dados das APIs "de exemplo" (Pok├®mon, MockAPI, Dragon Ball)
   const [person, setPerson] = useState({})
   const [personagem, setPersonagem] = useState({})
   const [pokemon, setPokemon] = useState({})
@@ -95,77 +91,6 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-      <header className="cabecalho">
-        <div className="marca">
-          <span className="marca-icone">🎬</span>
-          <div>
-            <h1>CineBusca</h1>
-            <p>Encontre seu próximo filme</p>
-          </div>
-        </div>
-
-        <div className="pesquisa-filmes">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => {
-              const valor = e.target.value
-              setQuery(valor)
-
-              if (!valor.trim()) {
-                setMovies([])
-                setQueryError('')
-              }
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') buscarFilmes()
-            }}
-            placeholder="Pesquise um filme..."
-          />
-
-          <button
-            type="button"
-            className="btn-pesquisar"
-            onClick={buscarFilmes}
-            disabled={queryLoading}
-          >
-            {queryLoading ? 'Buscando...' : 'Pesquisar'}
-          </button>
-        </div>
-
-        <div className="tema-opcoes">
-          <button
-            className="botao-tema"
-            onClick={() => setTema(tema === 'claro' ? 'escuro' : 'claro')}
-            aria-label="Alternar tema"
-            title="Alternar tema"
-          >
-            {tema === 'claro' ? '🌙' : '☀️'}
-          </button>
-        </div>
-      </header>
-
-      {queryError && <p className="mensagem">{queryError}</p>}
-
-      <ul className="lista-filmes">
-        {movies.map((movie) => (
-          <li key={movie.imdbID} className="cartao-filme">
-            <h3>{movie.Title}</h3>
-            <p>Ano: {movie.Year}</p>
-            <p>Tipo: {movie.Type}</p>
-
-            {movie.Poster !== 'N/A' && (
-              <img
-                src={movie.Poster}
-                alt={`Poster de ${movie.Title}`}
-                width="150"
-              />
-            )}
-          </li>
-        ))}
-      </ul>
-=======
       <Header
       query={query}
       setQuery={setQuery}
@@ -181,11 +106,10 @@ function App() {
   movies={movies}
   queryError={queryError}
 />
->>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
 
       {loading && <p className="mensagem">Carregando...</p>}
       {!loading && error && (
-        <p className="mensagem">Alguns dados não puderam ser carregados.</p>
+        <p className="mensagem">Alguns dados n├úo puderam ser carregados.</p>
       )}
 
       <section id="center">
@@ -216,18 +140,7 @@ function App() {
           </svg>
           <div>
             <h1>O Goat dos filmes.</h1>
-<<<<<<< HEAD
-            {destaque && (
-              <>
-                <h2>{destaque.Title}</h2>
-                {destaque.Poster !== 'N/A' && (
-                  <img src={destaque.Poster} alt={destaque.Title} />
-                )}
-              </>
-            )}
-=======
             <Destaque destaque={destaque} />
->>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
           </div>
           <ul>
             <li>
@@ -249,20 +162,7 @@ function App() {
             <use href="/icons.svg#social-icon"></use>
           </svg>
           <h2>Meu Pet</h2>
-<<<<<<< HEAD
-          <div>
-            <h1>{pokemon.name}</h1>
-            <img
-              src={pokemon.sprites?.front_default}
-              alt={pokemon.name}
-              width="250"
-            />
-            <p>Altura: {pokemon.height}</p>
-            <p>Peso: {pokemon.weight}</p>
-          </div>
-=======
           <Pokemon pokemon={pokemon} />
->>>>>>> 9a5b4e7 (refatora projeto e separa componentes)
           <ul>
             <li>
               <a href="https://github.com/thales097" target="_blank" rel="noreferrer">
